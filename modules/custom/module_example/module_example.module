@@ -1,0 +1,16 @@
+<?php
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_permission().
+ */
+function module_example_permission()
+{
+  return [
+    'access content' => [
+      'title' => t('Access content'),
+      'description' => t('Allows users to access the content of the module_example module.'),
+    ],
+  ];
+}
