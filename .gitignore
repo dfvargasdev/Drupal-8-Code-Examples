@@ -145,3 +145,5 @@ sites/default/settings.php
 sites/default/settings.ddev.php
 
 .ddev
+/.eslintrc.json
+/.htaccess
