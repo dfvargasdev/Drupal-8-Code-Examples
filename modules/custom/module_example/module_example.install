@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * @file
+ * Install file for module_example module.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_install().
+ */
+function module_example_install() {
+  // Create database table for contact form submissions.
+  $schema = Database::getConnection()->schema();
+  $table_name = 'custom_form';
+  $table = [
+    'description' => 'Stores submissions from the contact form on the example module',
+    'fields' => [
+      'id' => [
+        'description' => 'The primary identifier for a submission',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'name' => [
+        'description' => 'The name of the person submitting the form',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'email' => [
+        'description' => 'The email address of the person submitting the form',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'phone' => [
+        'description' => 'The phone number of the person submitting the form',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ],
+      'message' => [
+        'description' => 'The message submitted in the form',
+        'type' => 'text',
+        'not null' => TRUE,
+      ],
+      'quantity' => [
+        'description' => 'The quantity selected in the form',
+        'type' => 'int',
+        'not null' => TRUE,
+      ],
+      'color' => [
+        'description' => 'The color selected in the form',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'gender' => [
+        'description' => 'The gender selected in the form',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'interests' => [
+        'description' => 'The interests selected in the form',
+        'type' => 'text',
+        'not null' => FALSE,
+      ],
+      'delivery_date' => [
+        'description' => 'The delivery date selected in the form',
+        'type' => 'int',
+        'not null' => TRUE,
+      ],
+      'created' => [
+        'description' => 'The Unix timestamp when the submission was created',
+        'type' => 'int',
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  $schema->createTable( $table_name, $table);
+}
+
+

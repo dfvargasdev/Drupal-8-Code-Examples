@@ -1,0 +1,7 @@
+module_example.basket_form:
+  path: '/basket-form'
+  defaults:
+    _form: '\Drupal\module_example\Form\BasketForm'
+    _title: 'Basket Form'
+  requirements:
+    _permission: 'access content'
