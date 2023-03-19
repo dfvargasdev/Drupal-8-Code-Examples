@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: mydrupaldb
+      MYSQL_USER: mydrupaluser
+      MYSQL_PASSWORD: mydrupalpassword
+      MYSQL_ROOT_PASSWORD: myrootpassword
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+  drupal:
+    depends_on:
+      - db
+    image: drupal:8-apache
+    ports:
+      - "8000:80"
+    volumes:
+      - ./modules:/var/www/html/modules
+      - ./themes:/var/www/html/themes
+      - ./sites:/var/www/html/sites
+    restart: always
+    environment:
+      DRUPAL_DATABASE_HOST: db
+      DRUPAL_DATABASE_PORT: 3306
+      DRUPAL_DATABASE_NAME: mydrupaldb
+      DRUPAL_DATABASE_USERNAME: mydrupaluser
+      DRUPAL_DATABASE_PASSWORD: mydrupalpassword
+volumes:
+  db_data:
